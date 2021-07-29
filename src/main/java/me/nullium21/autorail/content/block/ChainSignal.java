@@ -3,7 +3,7 @@ package me.nullium21.autorail.content.block;
 /**
  * The chain signal block.
  */
-public class ChainSignal extends ARBlock {
+public class ChainSignal extends Signal {
     public ChainSignal(Settings settings) {
         super(settings);
     }
