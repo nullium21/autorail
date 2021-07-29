@@ -1,9 +1,16 @@
 package me.nullium21.autorail.content.block;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
+
 /**
  * The rail signal block.
  */
 public class Signal extends ARBlock {
+    public static final BooleanProperty CLOSED = BooleanProperty.of("closed");
+
     public Signal(Settings settings) {
         super(settings);
     }
@@ -11,5 +18,10 @@ public class Signal extends ARBlock {
     @Override
     public String getIdentifier() {
         return "rail_signal";
+    }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+        stateManager.add(CLOSED);
     }
 }
