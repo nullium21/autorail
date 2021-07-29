@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "autorail",
+  "version": "${version}",
+  "name": "Automated Railways",
+  "description": "Factorio-like railways and automation!",
+  "authors": [
+    "nullium21"
+  ],
+  "contact": {
+    "website": "https://github.com/nullium21/autorail",
+    "repo": "https://github.com/nullium21/autorail"
+  },
+  "license": "MIT",
+  "icon": "assets/autorail/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "me.nullium21.autorail.mod.AutorailClient"
+    ],
+    "main": [
+      "me.nullium21.mod.Autorail"
+    ]
+  },
+  "mixins": [
+    "autorail.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.6",
+    "fabric": "*",
+    "minecraft": ">=1.17"
+  }
+}
