@@ -7,9 +7,18 @@ import net.fabricmc.api.ModInitializer;
 import java.util.List;
 import java.util.function.Supplier;
 
+/**
+ * The main entry point for the mod.
+ */
 public class Autorail implements ModInitializer {
+    /**
+     * Mod's ID for use in identifiers.
+     */
     public static final String MODID = "autorail";
 
+    /**
+     * List of registries to be initialized.
+     */
     private static final List<Supplier<ARRegistry>> REGISTRIES = List.of(
             ARBlocks::new
     );

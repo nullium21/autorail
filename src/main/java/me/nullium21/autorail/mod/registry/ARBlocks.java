@@ -14,20 +14,35 @@ import net.minecraft.util.registry.Registry;
 
 import java.util.List;
 
+/**
+ * Blocks registry for the mod.
+ */
 public class ARBlocks implements ARRegistry {
 
+    /**
+     * The rail signal block singleton.
+     */
     public static final Signal B_SIGNAL = new Signal(
             FabricBlockSettings.of(Material.METAL)
                     .strength(4f));
 
+    /**
+     * The chain signal block singleton.
+     */
     public static final ChainSignal B_CHAIN_SIGNAL = new ChainSignal(
             FabricBlockSettings.of(Material.METAL)
                     .strength(4f));
 
+    /**
+     * The list of blocks to be registered.
+     */
     public static final List<ARBlock> BLOCKS = List.of(
             B_SIGNAL, B_CHAIN_SIGNAL
     );
 
+    /**
+     * The list of names for the blocks which should not have associated items.
+     */
     public static final List<String> NO_ITEMS = List.of(
 
     );
