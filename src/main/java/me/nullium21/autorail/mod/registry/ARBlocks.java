@@ -9,7 +9,6 @@ import net.minecraft.block.Material;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ARBlocks implements ARRegistry {
@@ -22,7 +21,7 @@ public class ARBlocks implements ARRegistry {
             FabricBlockSettings.of(Material.METAL)
                     .strength(4f));
 
-    public static final List<ARBlock> BLOCKS = Arrays.asList(
+    public static final List<ARBlock> BLOCKS = List.of(
             B_SIGNAL, B_CHAIN_SIGNAL
     );
 
