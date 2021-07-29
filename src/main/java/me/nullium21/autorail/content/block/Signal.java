@@ -9,6 +9,9 @@ import net.minecraft.state.property.BooleanProperty;
  * The rail signal block.
  */
 public class Signal extends ARBlock {
+    /**
+     * The 'closed' blockstate property controlling the signal's light color.
+     */
     public static final BooleanProperty CLOSED = BooleanProperty.of("closed");
 
     public Signal(Settings settings) {
