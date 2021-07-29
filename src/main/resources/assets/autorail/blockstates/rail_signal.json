@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,closed=false": {
+      "model": "autorail:block/rail_signal_green"
+    },
+    "facing=south,closed=false": {
+      "model": "autorail:block/rail_signal_green",
+      "y": 180
+    },
+    "facing=west,closed=false": {
+      "model": "autorail:block/rail_signal_green",
+      "y": 270
+    },
+    "facing=east,closed=false": {
+      "model": "autorail:block/rail_signal_green",
+      "y": 90
+    },
+    "facing=north,closed=true": {
+      "model": "autorail:block/rail_signal_red"
+    },
+    "facing=south,closed=true": {
+      "model": "autorail:block/rail_signal_red",
+      "y": 180
+    },
+    "facing=west,closed=true": {
+      "model": "autorail:block/rail_signal_red",
+      "y": 270
+    },
+    "facing=east,closed=true": {
+      "model": "autorail:block/rail_signal_red",
+      "y": 90
+    }
+  }
+}
