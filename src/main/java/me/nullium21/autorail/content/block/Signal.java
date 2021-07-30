@@ -55,11 +55,10 @@ public class Signal extends ARBlock {
         Optional<BlockPos> railPos = getAdjacentRail(ctx.getBlockPos(), ctx.getWorld());
         Optional<Vec3i>    delta   = railPos.map(it -> it.subtract(ctx.getBlockPos()));
 
-        try {
-            return getDefaultState().with(HORIZONTAL_FACING, RAIL_DIRECTIONS.get(delta.get()));
-        } catch (Exception e) {
-            return getDefaultState().with(HORIZONTAL_FACING, NORTH); // gonna be discarded anyway
-        }
+        Direction dir = delta.isPresent() ? RAIL_DIRECTIONS.get(delta.get()) : NORTH;
+        dir = dir.rotateYCounterclockwise(); // make it face the train/minecart on the right side
+
+        return getDefaultState().with(HORIZONTAL_FACING, dir);
     }
 
     @Override
