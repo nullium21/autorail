@@ -1,23 +1,22 @@
 package me.nullium21.autorail.content.block;
 
+import net.minecraft.block.AbstractRailBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Map;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 import static net.minecraft.state.property.Properties.HORIZONTAL_FACING;
 import static net.minecraft.util.math.Direction.*;
@@ -52,11 +51,13 @@ public class Signal extends ARBlock {
     @Nullable
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        Optional<BlockPos> railPos = getAdjacentRail(ctx.getBlockPos(), ctx.getWorld());
-        Optional<Vec3i>    delta   = railPos.map(it -> it.subtract(ctx.getBlockPos()));
+        Direction dir = getAdjacentRail(ctx.getBlockPos(), ctx.getWorld())
+                .flatMap(railPos -> {
+                    BlockPos delta = ctx.getBlockPos().subtract(railPos);
+                    Direction d = Direction.fromVector(delta);
 
-        Direction dir = delta.isPresent() ? RAIL_DIRECTIONS.get(delta.get()) : NORTH;
-        dir = dir.rotateYCounterclockwise(); // make it face the train/minecart on the right side
+                    return Optional.ofNullable(d).map(Direction::rotateYClockwise);
+                }).orElse(NORTH);
 
         return getDefaultState().with(HORIZONTAL_FACING, dir);
     }
@@ -71,14 +72,27 @@ public class Signal extends ARBlock {
         return getAdjacentRail(pos, world).isPresent();
     }
 
-    private static Optional<BlockPos> getAdjacentRail(BlockPos pos, WorldView world) {
-        return RAIL_DIRECTIONS.keySet().stream()                           // get vectors
-                .map(pos::add)                                              // make relative to 'pos'
-                .filter(p -> world.getBlockState(p).isIn(BlockTags.RAILS))  // filter for rails block
+    private static Optional<BlockPos> getAdjacentRail(BlockPos thisPos, WorldView world) {
+        return IntStream.range(0, 4)
+                .mapToObj(Direction::fromHorizontal)
+                .map(d -> thisPos.add(d.getVector()))
+                .filter(p -> AbstractRailBlock.isRail(world.getBlockState(p)))
+                .filter(p -> {
+                    Direction d = Direction.fromVector(thisPos.subtract(p));
+
+                    BlockState st = world.getBlockState(p);
+                    AbstractRailBlock arb = (AbstractRailBlock) st.getBlock();
+
+                    return switch (st.get(arb.getShapeProperty())) { // check if ok side
+                        case ASCENDING_NORTH, ASCENDING_SOUTH, NORTH_SOUTH -> d == EAST || d == WEST;
+                        case ASCENDING_EAST, ASCENDING_WEST, EAST_WEST -> d == NORTH || d == SOUTH;
+
+                        case NORTH_EAST -> d == SOUTH || d == WEST;
+                        case NORTH_WEST -> d == SOUTH || d == EAST;
+                        case SOUTH_EAST -> d == NORTH || d == WEST;
+                        case SOUTH_WEST -> d == NORTH || d == EAST;
+                    };
+                })
                 .findFirst();
     }
-
-    public static final Map<Vec3i, Direction> RAIL_DIRECTIONS = Map.of(
-            new Vec3i(+1, 0, 0), EAST,
-            new Vec3i(-1, 0, 0), WEST);
 }
