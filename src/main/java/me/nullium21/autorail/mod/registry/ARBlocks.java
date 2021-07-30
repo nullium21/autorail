@@ -7,6 +7,7 @@ import me.nullium21.autorail.content.block.Signal;
 import me.nullium21.autorail.mod.Autorail;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
@@ -21,25 +22,26 @@ import java.util.List;
 public class ARBlocks implements ARRegistry {
 
     /**
+     * Default block settings for all signal blocks.
+     */
+    private static final AbstractBlock.Settings S_SIGNAL =
+            FabricBlockSettings.of(Material.METAL)
+                    .strength(4f);
+
+    /**
      * The rail signal block singleton.
      */
-    public static final Signal B_SIGNAL = new Signal(
-            FabricBlockSettings.of(Material.METAL)
-                    .strength(4f));
+    public static final Signal B_SIGNAL = new Signal(S_SIGNAL);
 
     /**
      * The chain signal block singleton.
      */
-    public static final ChainSignal B_CHAIN_SIGNAL = new ChainSignal(
-            FabricBlockSettings.of(Material.METAL)
-                    .strength(4f));
+    public static final ChainSignal B_CHAIN_SIGNAL = new ChainSignal(S_SIGNAL);
 
     /**
      * The manual signal block singleton.
      */
-    public static final ManualSignal B_MANUAL_SIGNAL = new ManualSignal(
-            FabricBlockSettings.of(Material.METAL)
-                    .strength(4f));
+    public static final ManualSignal B_MANUAL_SIGNAL = new ManualSignal(S_SIGNAL);
 
     /**
      * The list of blocks to be registered.
