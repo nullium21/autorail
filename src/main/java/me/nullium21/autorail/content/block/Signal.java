@@ -6,14 +6,21 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
+import java.util.Optional;
+
 import static net.minecraft.state.property.Properties.HORIZONTAL_FACING;
-import static net.minecraft.util.math.Direction.NORTH;
+import static net.minecraft.util.math.Direction.*;
 
 /**
  * The rail signal block.
@@ -45,12 +52,34 @@ public class Signal extends ARBlock {
     @Nullable
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
+        Optional<BlockPos> railPos = getAdjacentRail(ctx.getBlockPos(), ctx.getWorld());
+        Optional<Vec3i>    delta   = railPos.map(it -> it.subtract(ctx.getBlockPos()));
+
         return getDefaultState()
-                .with(HORIZONTAL_FACING, ctx.getPlayerFacing().getOpposite());
+                .with(HORIZONTAL_FACING, ALLOWED_DIRECTIONS.getOrDefault(
+                        delta.orElse(null), NORTH)); // if no adj rail found, north; it's gonna be discarded anyway
     }
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return VoxelShapes.cuboid(2/16d, 0d, 2/16d, 14/16d, 14/16d, 16/16d);
     }
+
+    @Override
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        return getAdjacentRail(pos, world).isPresent();
+    }
+
+    private static Optional<BlockPos> getAdjacentRail(BlockPos pos, WorldView world) {
+        return ALLOWED_DIRECTIONS.keySet().stream()                         // get vectors
+                .map(pos::add)                                              // make relative to 'pos'
+                .filter(p -> world.getBlockState(p).isIn(BlockTags.RAILS))  // filter for rails block
+                .findFirst();
+    }
+
+    public static final Map<Vec3i, Direction> ALLOWED_DIRECTIONS = Map.of(
+            new Vec3i(0, 0, -1), NORTH,
+            new Vec3i(0, 0, +1), SOUTH,
+            new Vec3i(+1, 0, 0), EAST,
+            new Vec3i(-1, 0, 0), WEST);
 }
