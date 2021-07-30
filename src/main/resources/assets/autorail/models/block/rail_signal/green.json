@@ -1,0 +1,6 @@
+{
+  "parent": "autorail:block/rail_signal/base",
+  "textures": {
+    "0": "autorail:block/rail_signal_green"
+  }
+}
