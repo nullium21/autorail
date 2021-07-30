@@ -19,7 +19,7 @@
       "me.nullium21.autorail.mod.AutorailClient"
     ],
     "main": [
-      "me.nullium21.mod.Autorail"
+      "me.nullium21.autorail.mod.Autorail"
     ]
   },
   "mixins": [
