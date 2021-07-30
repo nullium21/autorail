@@ -2,6 +2,7 @@ package me.nullium21.autorail.mod.registry;
 
 import me.nullium21.autorail.content.block.ARBlock;
 import me.nullium21.autorail.content.block.ChainSignal;
+import me.nullium21.autorail.content.block.ManualSignal;
 import me.nullium21.autorail.content.block.Signal;
 import me.nullium21.autorail.mod.Autorail;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -33,11 +34,15 @@ public class ARBlocks implements ARRegistry {
             FabricBlockSettings.of(Material.METAL)
                     .strength(4f));
 
+    public static final ManualSignal B_MANUAL_SIGNAL = new ManualSignal(
+            FabricBlockSettings.of(Material.METAL)
+                    .strength(4f));
+
     /**
      * The list of blocks to be registered.
      */
     public static final List<ARBlock> BLOCKS = List.of(
-            B_SIGNAL, B_CHAIN_SIGNAL
+            B_SIGNAL, B_CHAIN_SIGNAL, B_MANUAL_SIGNAL
     );
 
     /**
