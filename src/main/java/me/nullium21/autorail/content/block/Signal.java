@@ -56,7 +56,7 @@ public class Signal extends ARBlock {
         Optional<Vec3i>    delta   = railPos.map(it -> it.subtract(ctx.getBlockPos()));
 
         try {
-            return getDefaultState().with(HORIZONTAL_FACING, DELTA_DIRECTIONS.get(delta.get()));
+            return getDefaultState().with(HORIZONTAL_FACING, RAIL_DIRECTIONS.get(delta.get()));
         } catch (Exception e) {
             return getDefaultState().with(HORIZONTAL_FACING, NORTH); // gonna be discarded anyway
         }
@@ -73,15 +73,13 @@ public class Signal extends ARBlock {
     }
 
     private static Optional<BlockPos> getAdjacentRail(BlockPos pos, WorldView world) {
-        return DELTA_DIRECTIONS.keySet().stream()                           // get vectors
+        return RAIL_DIRECTIONS.keySet().stream()                           // get vectors
                 .map(pos::add)                                              // make relative to 'pos'
                 .filter(p -> world.getBlockState(p).isIn(BlockTags.RAILS))  // filter for rails block
                 .findFirst();
     }
 
-    public static final Map<Vec3i, Direction> DELTA_DIRECTIONS = Map.of(
-            new Vec3i(0, 0, -1), NORTH,
-            new Vec3i(0, 0, +1), SOUTH,
+    public static final Map<Vec3i, Direction> RAIL_DIRECTIONS = Map.of(
             new Vec3i(+1, 0, 0), EAST,
             new Vec3i(-1, 0, 0), WEST);
 }
