@@ -34,6 +34,9 @@ public class ARBlocks implements ARRegistry {
             FabricBlockSettings.of(Material.METAL)
                     .strength(4f));
 
+    /**
+     * The manual signal block singleton.
+     */
     public static final ManualSignal B_MANUAL_SIGNAL = new ManualSignal(
             FabricBlockSettings.of(Material.METAL)
                     .strength(4f));
