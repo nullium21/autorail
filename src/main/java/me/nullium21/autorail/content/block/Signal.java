@@ -22,7 +22,10 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 
 import static net.minecraft.state.property.Properties.HORIZONTAL_FACING;
-import static net.minecraft.util.math.Direction.*;
+import static net.minecraft.util.math.Direction.NORTH;
+import static net.minecraft.util.math.Direction.SOUTH;
+import static net.minecraft.util.math.Direction.EAST;
+import static net.minecraft.util.math.Direction.WEST;
 
 /**
  * The rail signal block.
