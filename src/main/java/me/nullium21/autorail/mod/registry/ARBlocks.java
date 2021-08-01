@@ -1,5 +1,6 @@
 package me.nullium21.autorail.mod.registry;
 
+import me.nullium21.autorail.base.ARIdentifiableBlockItem;
 import me.nullium21.autorail.content.block.*;
 import me.nullium21.autorail.mod.Autorail;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -11,12 +12,15 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Blocks registry for the mod.
  */
-public class ARBlocks implements ARRegistry {
+public class ARBlocks implements ARRegistry<ARBlock> {
 
     /**
      * Default block settings for all signal blocks.
@@ -60,6 +64,8 @@ public class ARBlocks implements ARRegistry {
 
     );
 
+    public static final Map<ARBlock, ARIdentifiableBlockItem> B_ITEMS = new HashMap<>();
+
     @Override
     public void register() {
         BLOCKS.forEach(block -> {
@@ -68,7 +74,16 @@ public class ARBlocks implements ARRegistry {
             Registry.register(Registry.BLOCK, id, block);
 
             if (!NO_ITEMS.contains(id.getPath()))
-                Registry.register(Registry.ITEM, id, new BlockItem(block, S_BLOCK_ITEM));
+                B_ITEMS.put(block, Registry.register(Registry.ITEM, id,
+                        new ARIdentifiableBlockItem(block, S_BLOCK_ITEM) {
+                            @Override
+                            public String getIdentifier() { return block.getIdentifier(); }
+                        }));
         });
+    }
+
+    @Override
+    public Collection<ARBlock> getAll() {
+        return BLOCKS;
     }
 }

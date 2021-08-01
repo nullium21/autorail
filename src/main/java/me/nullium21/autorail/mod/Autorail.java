@@ -19,14 +19,12 @@ public class Autorail implements ModInitializer {
     /**
      * List of registries to be initialized.
      */
-    private static final List<Supplier<ARRegistry>> REGISTRIES = List.of(
-            ARBlocks::new
+    public static final List<ARRegistry<?>> REGISTRIES = List.of(
+            new ARBlocks()
     );
 
     @Override
     public void onInitialize() {
-        REGISTRIES.stream()
-                .map(Supplier::get) // construct instances of registries
-                .forEach(ARRegistry::register); // register everything
+        REGISTRIES.forEach(ARRegistry::register); // register everything
     }
 }

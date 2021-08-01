@@ -4,6 +4,7 @@
   "package": "me.nullium21.autorail.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ModelLoaderMixin"
   ],
   "client": [
   ],
