@@ -1,11 +1,11 @@
 package me.nullium21.autorail.mod;
 
 import me.nullium21.autorail.mod.registry.ARBlocks;
+import me.nullium21.autorail.mod.registry.ARItems;
 import me.nullium21.autorail.mod.registry.ARRegistry;
 import net.fabricmc.api.ModInitializer;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 /**
  * The main entry point for the mod.
@@ -20,7 +20,8 @@ public class Autorail implements ModInitializer {
      * List of registries to be initialized.
      */
     public static final List<ARRegistry<?>> REGISTRIES = List.of(
-            new ARBlocks()
+            new ARBlocks(),
+            new ARItems()
     );
 
     @Override

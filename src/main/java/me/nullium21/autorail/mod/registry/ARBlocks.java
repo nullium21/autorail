@@ -32,7 +32,7 @@ public class ARBlocks implements ARRegistry<ARBlock> {
     /**
      * Default item settings for block items.
      */
-    private static final FabricItemSettings S_BLOCK_ITEM = new FabricItemSettings()
+    public static final FabricItemSettings S_BLOCK_ITEM = new FabricItemSettings()
             .group(ItemGroup.TRANSPORTATION);
 
     /**
