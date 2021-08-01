@@ -8,6 +8,8 @@ import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.world.World;
 
+import static net.minecraft.util.Util.NIL_UUID;
+
 public class Wrench extends ARItem {
     public Wrench(Settings settings) {
         super(settings);
@@ -32,9 +34,11 @@ public class Wrench extends ARItem {
                     blockState.with(Signal.REDSTONE_BEHAVIOR, nextBehavior));
 
             if (ctx.getPlayer() != null)
-                ctx.getPlayer().sendMessage(Text.of(
+                ctx.getPlayer().sendSystemMessage(Text.of(
                         String.format("Changed redstone behavior from %s to %s.", currentBehavior, nextBehavior)),
-                        false);
+                        NIL_UUID);
+
+            return ActionResult.SUCCESS;
         }
 
         return super.useOnBlock(ctx);
