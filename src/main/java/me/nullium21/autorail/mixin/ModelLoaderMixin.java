@@ -49,18 +49,14 @@ public class ModelLoaderMixin {
 
         String name = id.getPath().split("/")[id.getPath().split("/").length-1]; // last
 
-        System.out.println("MLM:51 " + name + " " + id);
-
         for (ARRegistry<?> r : REGISTRIES) {
             Collection<? extends ARIdentifiable> all = r.getAll();
-            System.out.println("MLM:54 " + r + " " + all);
 
             r.getAll().stream()
                     .filter(e -> e.getIdentifier().equals(name))
                     .filter(e -> MODEL_PATHS.containsKey(e.getIdentifier()))
                     .forEach(entry -> {
                         String modelPath = "models/" + MODEL_PATHS.get(entry.getIdentifier()) + ".json";
-                        System.out.println("MLM:61 " + entry + " " + modelPath);
 
                         try {
                             Resource res = resman.getResource(new Identifier(Autorail.MODID, modelPath));
