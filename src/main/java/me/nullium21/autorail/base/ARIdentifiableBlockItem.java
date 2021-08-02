@@ -1,5 +1,6 @@
 package me.nullium21.autorail.base;
 
+import me.nullium21.autorail.base.interfaces.ARIdentifiable;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 

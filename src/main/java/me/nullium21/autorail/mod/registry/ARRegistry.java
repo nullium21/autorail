@@ -1,6 +1,6 @@
 package me.nullium21.autorail.mod.registry;
 
-import me.nullium21.autorail.base.ARIdentifiable;
+import me.nullium21.autorail.base.interfaces.ARIdentifiable;
 
 import java.util.Collection;
 

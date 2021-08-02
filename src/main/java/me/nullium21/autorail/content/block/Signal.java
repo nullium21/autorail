@@ -1,5 +1,6 @@
 package me.nullium21.autorail.content.block;
 
+import me.nullium21.autorail.base.ARBlock;
 import net.minecraft.block.AbstractRailBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

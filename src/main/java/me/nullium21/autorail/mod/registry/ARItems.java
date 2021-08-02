@@ -1,6 +1,6 @@
 package me.nullium21.autorail.mod.registry;
 
-import me.nullium21.autorail.content.item.ARItem;
+import me.nullium21.autorail.base.ARItem;
 import me.nullium21.autorail.content.item.Wrench;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.util.Identifier;

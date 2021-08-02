@@ -1,6 +1,6 @@
 package me.nullium21.autorail.mixin;
 
-import me.nullium21.autorail.base.ARIdentifiable;
+import me.nullium21.autorail.base.interfaces.ARIdentifiable;
 import me.nullium21.autorail.mod.Autorail;
 import me.nullium21.autorail.mod.registry.ARRegistry;
 import net.minecraft.client.MinecraftClient;
