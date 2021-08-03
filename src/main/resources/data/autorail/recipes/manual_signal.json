@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "wLw",
+    "ili",
+    "iri"
+  ],
+  "key": {
+    "w": { "tag": "minecraft:planks" },
+    "i": { "item": "minecraft:iron_ingot" },
+    "l": { "item": "minecraft:redstone_lamp" },
+    "r": { "item": "minecraft:redstone" },
+    "L": { "item": "minecraft:lever" }
+  },
+  "result": {
+    "item": "autorail:manual_signal",
+    "count": 2
+  }
+}

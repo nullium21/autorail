@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " ii",
+    " r ",
+    "s  "
+  ],
+  "key": {
+    "i": { "item": "minecraft:iron_ingot" },
+    "r": { "item": "minecraft:redstone" },
+    "s": { "item": "minecraft:stick" }
+  },
+  "result": {
+    "item": "autorail:rail_wrench",
+    "count": 2
+  }
+}
