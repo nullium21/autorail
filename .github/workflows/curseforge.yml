@@ -1,1 +1,35 @@
 name: CurseForge
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-java@v2.1.0
+      with:
+        java-version: 16
+    - id: get_version
+      uses: christian-draeger/read-properties@1.0.1
+      with:
+        path: gradle.properties
+        property: mod_version
+    - uses: gradle/gradle-build-action@v1.3.3
+      with:
+        arguments: jar
+    - uses: actions/upload-artifact@v2.2.4
+      with:
+        path: build/libs/autorail-*.jar
+    - uses: itsmeow/curseforge-upload@v3
+      with:
+        token: ${{ secrets.CF_API_KEY }}
+        project_id: 509720
+        game_endpoint: minecraft
+        file_path: build/libs/autorail-${{ steps.get_version.outputs.value }}.jar
+        game_versions: Minecraft 1.17:1.17.1,Fabric,java:Java 16
+        release_type: alpha
+        relations: fabric:dependency
