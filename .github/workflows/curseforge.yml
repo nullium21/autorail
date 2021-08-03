@@ -27,7 +27,7 @@ jobs:
         path: build/libs/autorail-*.jar
     - uses: itsmeow/curseforge-upload@v3
       with:
-        token: ${{ secrets.CF_API_KEY }}
+        token: ${{ secrets.CF_API_TOKEN }}
         project_id: 509720
         game_endpoint: minecraft
         file_path: build/libs/autorail-${{ steps.get_version.outputs.value }}.jar
