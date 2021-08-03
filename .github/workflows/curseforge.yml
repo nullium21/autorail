@@ -13,6 +13,7 @@ jobs:
     - uses: actions/setup-java@v2.1.0
       with:
         java-version: 16
+        distribution: zulu
     - id: get_version
       uses: christian-draeger/read-properties@1.0.1
       with:
